@@ -1,0 +1,81 @@
+{
+	"author": "Adrian Jost <github@adrianjost.dev> (https://adrianjost.dev)",
+	"browserslist": [
+		"> 1%",
+		"last 2 versions"
+	],
+	"bugs": {
+		"url": "https://github.com/adrianjost/chooose/issues"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.11.6",
+		"@babel/preset-env": "^7.11.5",
+		"@vue/babel-preset-app": "^4.5.6",
+		"@vue/cli-plugin-babel": "^4.5.6",
+		"@vue/cli-plugin-eslint": "^4.5.6",
+		"@vue/cli-service": "^4.5.6",
+		"@vue/eslint-config-prettier": "^6.0.0",
+		"babel-cli": "^6.26.0",
+		"babel-eslint": "^10.1.0",
+		"babel-jest": "^26.3.0",
+		"cross-env": "^7.0.2",
+		"eslint": "^6.1.0",
+		"eslint-config-prettier": "^6.12.0",
+		"eslint-plugin-prettier": "^3.1.4",
+		"eslint-plugin-vue": "^7.0.0",
+		"jest": "^26.4.2",
+		"lint-staged": "^10.4.0",
+		"node-sass": "^4.14.1",
+		"npm-run-all": "^4.1.5",
+		"prettier": "^2.1.2",
+		"sass-loader": "^10.0.2",
+		"vue": "^2.6.12",
+		"vue-eslint-parser": "^7.1.0",
+		"vue-template-compiler": "^2.6.12"
+	},
+	"files": [
+		"dist/*",
+		"LICENSE",
+		"README.md"
+	],
+	"gitHooks": {
+		"pre-commit": "lint-staged"
+	},
+	"homepage": "http://github.com/adrianjost/Chooose",
+	"license": "MIT",
+	"lint-staged": {
+		"*.{js,vue}": [
+			"vue-cli-service lint",
+			"git add"
+		]
+	},
+	"main": "dist/vue/Chooose.umd.min.js",
+	"module": "dist/vue/Chooose.common.js",
+	"name": "@adrianjost/chooose",
+	"peerDependencies": {
+		"vue": "^2.6.12"
+	},
+	"postcss": {
+		"plugins": {
+			"autoprefixer": {}
+		}
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": "github:adrianjost/chooose",
+	"scripts": {
+		"build": "run-p build:*",
+		"build:demo": "npx vue-cli-service build --target lib --name DemoChooose ./src/Dev.vue --mode production --dest dist/demo",
+		"build:helper": "cross-env BUILD_TARGET=helpers babel src/helpers/ --out-dir dist/helpers --ignore src/**/*.*.*",
+		"build:vue": "npx vue-cli-service build --target lib --name Chooose ./src/Chooose.vue --mode production --dest dist/vue",
+		"build:wc": "npx vue-cli-service build --target wc --inline-vue --name chooose ./src/Chooose.vue --dest dist/wc",
+		"dev": "npx vue-cli-service serve",
+		"lint": "npx vue-cli-service lint",
+		"lint:ci": "npm run lint",
+		"test": "jest",
+		"test:update": "jest -u",
+		"test:watch": "yarn test --watchAll"
+	},
+	"version": "0.3.6"
+}
