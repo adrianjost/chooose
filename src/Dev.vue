@@ -1,6 +1,7 @@
 <template>
 	<div class="wrapper">
 		<h1> {{ formatedValue }} </h1>
+		<input v-model="valueString" type="text" style="width: 100%" />
 		<div style="margin: 1em 0">
 			<button @click="visible = !visible">toggle visibility</button>
 		</div>
@@ -18,7 +19,8 @@ export default {
 	data() {
 		return {
 			visible: true,
-			value: [5, 15, 255, 5],
+			valueString:
+				"0.01, 0.01, 0.01, 0.02, 0.05, 0.2, 0.5, 0.8, 0.9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.8, 0.5, 0.2, 0.05, 0.01, 0.01",
 		};
 	},
 	computed: {
@@ -28,16 +30,19 @@ export default {
 			const format = (v) => parseFloat(Math.round(v * h) / h).toFixed(digits);
 			return this.value.map(format);
 		},
+		value() {
+			return this.valueString.split(",").map((v) => parseFloat(v.trim()));
+		},
 	},
 	watch: {
-		value(to) {
+		valueString(to) {
 			sessionStorage.setItem("value", JSON.stringify(to));
 		},
 	},
 	created() {
 		const storageValue = sessionStorage.getItem("value");
 		if (storageValue) {
-			this.value = JSON.parse(storageValue);
+			this.valueString = JSON.parse(storageValue);
 		}
 	},
 };
@@ -56,7 +61,7 @@ export default {
 }
 .picker {
 	display: inline-block;
-	width: 500px;
+	width: 800px;
 	height: 300px;
 }
 </style>
