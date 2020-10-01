@@ -2,7 +2,7 @@
 	<div class="picker-wrapper">
 		<div class="picker">
 			<svg id="graph" :viewBox="viewBox" class="graph">
-				<path :d="line" stroke="black" fill="transparent" />
+				<path :d="line" stroke="#0005" stroke-width="5" fill="transparent" />
 			</svg>
 			<div class="markers">
 				<div
@@ -33,16 +33,16 @@ export default {
 	},
 	computed: {
 		width() {
-			return (this.value.length - 1) * 25;
+			return 800;
 		},
 		height() {
-			return 100;
+			return 200;
 			const min = Math.min(...this.value);
 			const max = Math.max(...this.value);
 			return min >= 0 ? max : max - min;
 		},
 		zeroYOffset() {
-			return 100;
+			return this.height;
 			return Math.max(...this.value);
 		},
 		viewBox() {
@@ -50,12 +50,12 @@ export default {
 		},
 		chartZero() {
 			const max = Math.max(...this.value);
-			return { x: 0, y: 100 };
+			return { x: 0, y: this.height };
 		},
 		handleCoordinates() {
 			return this.value.map((y, i) => ({
 				x: this.posX(i),
-				y: y * 100,
+				y: y * this.height,
 			}));
 		},
 		line() {
@@ -90,7 +90,9 @@ export default {
 				"border-width": `${borderWidth}px`,
 				left: `${(i / (this.value.length - 1)) * 100}%`,
 				bottom: `${this.value[i] * 100}%`,
-				"background-color": `rgba(0,0,0, ${1 - this.value[i]})`,
+				"background-color": `rgb(${255 * this.value[i]}, ${
+					220 * this.value[i]
+				}, ${130 * this.value[i]}, 0.8)`,
 			};
 		},
 	},

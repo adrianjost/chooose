@@ -51,7 +51,7 @@ export const controlPoint = (current, previous, next, reverse) => {
 	const p = previous || current;
 	const n = next || current;
 	// The smoothing ratio
-	const smoothing = 0;
+	const smoothing = 0.15;
 	// Properties of the opposed-line
 	const o = line(p, n);
 	// If is end-control-point, add PI to the angle to go backward
